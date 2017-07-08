@@ -1,0 +1,10 @@
+name: PlayerAssistant
+main: com.mclovesmy.PlayerAssistant.PlayerAssistant
+version: 1.0
+commands:
+  pa:
+    description: Main PlayerAssistant command
+    usage: /pa
+  playerassistant:
+    description: Main PlayerAssistant command
+    usage: /PlayerAssistant
