@@ -1,0 +1,2 @@
+# PlayerAssistant
+Spigot plugin
