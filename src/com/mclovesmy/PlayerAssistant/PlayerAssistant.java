@@ -40,15 +40,17 @@ public class PlayerAssistant extends JavaPlugin implements CommandExecutor{
 				if (args.length == 0) { //Show help when no argument is specified
 					sender.sendMessage(ChatColor.BLUE + "PlayerAssistant commands:");
 					sender.sendMessage(ChatColor.BLUE + " - /pa spawn | Spawn your assistant");
-					sender.sendMessage(ChatColor.BLUE + " - /pa plant <seed;carrot;> | Let your assisant plant");
+					sender.sendMessage(ChatColor.BLUE + " - /pa plant <seed;carrot;> | Let your assisant plant seeds or carrots");
 				} else if (args[0].equalsIgnoreCase("spawn"))  { //Spawn assistant
 					assistantEntity.spawnAssistant(player);
+				} else if (args[0].equalsIgnoreCase("despawn")) {
+					assistantEntity.despawnAssistant(player);
 				} else if (args[0].equalsIgnoreCase("plant")) { //Plant seeds
-					if (assistantEntity.assistant != null) {
+					if (AssistantEntity.assistant != null) {
 						if (args.length == 2) { //Seed must be specified
 							Plant plant = new Plant();
 						
-							plant.plant(player, assistantEntity.assistant, args[1]);
+							plant.plant(player, AssistantEntity.assistant, args[1]);
 						} else {
 							player.sendMessage(ChatColor.BLUE + "Please specify a crop type (carrot/seed)");
 						}

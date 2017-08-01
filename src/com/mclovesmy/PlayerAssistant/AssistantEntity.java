@@ -5,13 +5,13 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftEntity;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -27,6 +27,7 @@ public class AssistantEntity implements Listener {
 	public static Entity assistant;
 	
 	public boolean follow = true;
+	public boolean exists = false;
 
 	public static HashMap<UUID, UUID> hashmap = new HashMap<UUID, UUID>();
 	
@@ -53,10 +54,17 @@ public class AssistantEntity implements Listener {
             	 return;
             	}
             	
-            	if (follow == false) {
+            	if (exists == false) {
             		Bukkit.getScheduler().cancelTask(id);
+                	assistant.remove();
+                	hashmap.remove(uuid);
+                	return;	
             	}
             	
+            	if (follow == false) {
+            		Bukkit.getScheduler().cancelTask(id);
+            		return;
+            	}
             	
             	Object petObject = ((CraftEntity)entity).getHandle();
             	Location loc = player.getLocation();
@@ -85,6 +93,8 @@ public class AssistantEntity implements Listener {
 	public void spawnAssistant (Player player) {
 		UUID uuid = player.getUniqueId();
 		
+		exists = true;
+		
 		if (!hashmap.containsKey(uuid)) {
 			
 			assistant = (Entity) player.getWorld().spawnEntity(player.getLocation(), EntityType.VILLAGER);
@@ -104,6 +114,11 @@ public class AssistantEntity implements Listener {
 			boolean test = hashmap.containsValue(assistant.getUniqueId());
 			player.sendMessage(ChatColor.BLUE + "Your assistant already exists! " + test + " uuid = " + assistant.getUniqueId());
 		}
+	}
+	
+	public void despawnAssistant (Player player) {
+		player.sendMessage("Your damn thing pawned now forever");
+			exists = false;
 	}
 	
 	@EventHandler

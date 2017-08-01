@@ -2,23 +2,19 @@ package com.mclovesmy.PlayerAssistant.tasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftEntity;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import com.mclovesmy.PlayerAssistant.AssistantEntity;
 import com.mclovesmy.PlayerAssistant.PlayerAssistant;
-
-import net.minecraft.server.v1_12_R1.EntityInsentient;
-import net.minecraft.server.v1_12_R1.PathEntity;
 
 public class Fight implements Listener {
 	
@@ -37,16 +33,9 @@ public class Fight implements Listener {
 			return;
 		}
 		
-		Bukkit.broadcastMessage("0'tje");
-		
-			Bukkit.broadcastMessage("1'tje");
 			if (e.getDamager() instanceof Player ) {
 				Player player = (Player) e.getDamager();
 				Entity entity = e.getEntity();
-				
-				player.sendMessage("2'tje");
-				
-				player.sendMessage("3.5: " + AssistantEntity.assistant);
 				
 				focus = true;
 				
@@ -62,14 +51,11 @@ public class Fight implements Listener {
 							count = 0;
 							focus = false;
 						}
-		            	
+						
 		            	Location assistantHead = AssistantEntity.assistant.getLocation();
 						
-						player.sendMessage("4: " + assistantHead);
-						
 						assistantHead.setY(assistantHead.getY() + 3);
-						
-						player.sendMessage("5: " + assistantHead);
+			
 						
 						Location targetHead = entity.getLocation();
 						targetHead.setY(targetHead.getY() + 1);
